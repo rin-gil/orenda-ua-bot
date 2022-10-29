@@ -1,0 +1,1 @@
+from .search_setup_dialog import register_commands, register_callbacks, register_messages

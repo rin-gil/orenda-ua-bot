@@ -1,5 +1,5 @@
 [Unit]
-Description=Course Bot
+Description=OrendaUAbot daemon
 After=network.target
 
 [Service]
