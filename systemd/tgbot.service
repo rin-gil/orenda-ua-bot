@@ -6,8 +6,8 @@ After=network.target
 User=tgbot
 Group=tgbot
 Type=simple
-WorkingDirectory=/opt/tgbot
-ExecStart=/opt/tgbot/venv/bin/python bot.py
+WorkingDirectory=/opt/OrendaUAbot
+ExecStart=/opt/OrendaUAbot/venv/bin/python bot.py
 Restart=always
 
 [Install]
