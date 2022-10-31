@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://repository-images.githubusercontent.com/559275297/1978c37c-7735-45a5-afec-039bd4751143" alt="OrendaUA Bot" width="640">
+    <img src="https://repository-images.githubusercontent.com/559275297/4c8d91b7-c55c-4c70-8903-2f45ebcdab3f" alt="OrendaUA Bot" width="640">
 </p>
 
 <p align="center">
@@ -12,16 +12,20 @@
     <a href="https://github.com/rin-gil/OrendaUAbot/blob/master/LICENCE"><img src="https://img.shields.io/badge/licence-MIT-success" alt="MIT licence"></a>
 </p>
 
+<p align="right">
+    <a href="https://github.com/rin-gil/OrendaUAbot/blob/master/README.ua.md">Читати українською</a>
+</p>
+
 ## OrendaUA bot
 
-Бот для розсилки оголошень з сайту [DOM.RIA](https://dom.ria.com/uk/). Робоча версія доступна за посиланням [https://t.me/OrendaUAbot](https://t.me/OrendaUAbot)
+Bot for sending ads from the site [DOM.RIA](https://dom.ria.com/uk/). The working version is available at [https://t.me/OrendaUAbot](https://t.me/OrendaUAbot)
 
-### Можливості
+### Features
 
-* Налаштування фільтра для пошуку оголошень.
-* Підписка на нові оголошення, згідно з заданим фільтром.
+* Setting up a filter for searching ads.
+* Subscription to new ads, according to the specified filter.
 
-### Установка
+### Installation
 
 ```
 git clone https://github.com/rin-gil/OrendaUAbot.git
@@ -32,21 +36,21 @@ pip install -r requirements.txt
 mv .env.dist .env
 ```
 
-### Налаштування та запуск
+### Setup and launch
 
-* Зареєструйте нового бота у [BotFather](https://t.me/BotFather) і скопіюйте отриманий токен
-* Вставте токен бота у файл .env
-* Запуск бота через файл bot.py `python bot.py`
+* Register a new bot with [BotFather](https://t.me/BotFather) and copy the obtained token
+* Insert the bot token into the .env file
+* Running the bot through the bot.py file `python bot.py`
 
 ### Обмеження
-* Бот шукає тільки оголошення про оренду квартир, пошук квартир на продаж та інші категорії оголошень з сайту [DOM.RIA](https://dom.ria.com/uk/) не доступні.
-* Перегляд знайдених об'яв з бота недоступний. Замість цього ви отримуватимете повідомлення з фотографією і коротким описом квартири, що здається.
-Переглянути повне оголошення та зв'язатися з автором оголошення ви можете, перейшовши на сайт за посиланням.
+* The bot only searches for apartment rental ads, search for apartments for sale and other categories of ads from the site [DOM.RIA](https://dom.ria.com/uk/) are not available.
+* Viewing found ads from the bot is not available. Instead, you will receive a message with a photo and a brief description of the apartment for rent.
+You can view the full ad and contact the author of the ad by clicking on the link.
 
-### Розробники
+### Developers
 
 * [Ringil](https://github.com/rin-gil)
 
 ### License
 
-Проєкт OrendaUA bot поширюється за ліцензією [MIT](https://github.com/rin-gil/OrendaUAbot/blob/master/LICENCE)
+OrendaUA bot is licensed under [MIT](https://github.com/rin-gil/OrendaUAbot/blob/master/LICENCE)
