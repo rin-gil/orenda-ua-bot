@@ -42,7 +42,7 @@ mv .env.dist .env
 * Insert the bot token into the .env file
 * Running the bot through the bot.py file `python bot.py`
 
-### Обмеження
+### Limitations
 * The bot only searches for apartment rental ads, search for apartments for sale and other categories of ads from the site [DOM.RIA](https://dom.ria.com/uk/) are not available.
 * Viewing found ads from the bot is not available. Instead, you will receive a message with a photo and a brief description of the apartment for rent.
 You can view the full ad and contact the author of the ad by clicking on the link.
