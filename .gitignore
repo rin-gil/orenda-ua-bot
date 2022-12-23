@@ -11,8 +11,5 @@ venv/
 # Logs
 *.log
 
-# Temp
-temp/
-
 # Database
 *.sqlite3

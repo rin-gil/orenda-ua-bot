@@ -43,7 +43,7 @@ max-parents = 7
 max-public-methods = 20
 max-returns = 6
 max-statements = 50
-min-public-methods = 2
+min-public-methods = 1
 
 [tool.pylint.exceptions]
 overgeneral-exceptions = ["BaseException"]
@@ -65,7 +65,7 @@ logging-modules = ["logging"]
 [tool.pylint."messages control"]
 confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFINED"]
 disable = ["raw-checker-failed", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message",
-    "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "arguments-differ"]
+    "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "arguments-differ", "unused-argument"]
 enable = ["c-extension-no-member"]
 
 [tool.pylint.method_args]

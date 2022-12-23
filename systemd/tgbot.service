@@ -1,4 +1,4 @@
-# Example configuration for running the bot on a server as a systemd service
+# Приклад конфігурації для запуску бота на сервері в якості системної служби
 [Unit]
 Description=OrendaUAbot daemon
 After=network.target
