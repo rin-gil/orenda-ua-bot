@@ -1,6 +1,7 @@
 """Налаштування конфігурації для бота"""
 
 import logging
+import sys
 
 from os.path import join, normpath
 from pathlib import Path
@@ -8,6 +9,8 @@ from typing import NamedTuple
 
 from environs import Env
 
+
+sys.tracebacklimit = 0
 
 BASE_DIR: Path = Path(__file__).resolve().parent.parent
 BOT_LOGO: str = normpath(join(BASE_DIR, "tgbot/assets/img/bot_logo.png"))
