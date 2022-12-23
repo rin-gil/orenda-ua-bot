@@ -18,7 +18,7 @@ LOG_FILE: str = join(BASE_DIR, "log.log")
 logger: logging.Logger = logging.getLogger(__name__)
 logging.basicConfig(
     filename=LOG_FILE,
-    level=logging.INFO,
+    level=logging.WARNING,
     format="%(levelname)-8s %(filename)s:%(lineno)d [%(asctime)s] - %(name)s - %(message)s",
 )
 
