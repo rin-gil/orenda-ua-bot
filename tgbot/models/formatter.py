@@ -1,7 +1,5 @@
 """Форматує різні дані в потрібну форму"""
 
-from datetime import date, timedelta
-
 from tgbot.models.dataclasses import AdDetailedInfo, AdShortInfo
 
 
@@ -52,13 +50,12 @@ class Formatter:
             f"&realty_type=2"
             f"&operation=3"
             f"&sort=created_at"
+            f"&period=0"
             f"&photos_count_from=1"
             f"&limit=50"
             f"&state_id={dialog_data['state_id']}"
             f"&city_id={dialog_data['city_id']}"
             f"&d_id={dialog_data['district_id'] if dialog_data.get('district_id') else '0'}"
-            f"&date_from={date.today() - timedelta(days=60)}"
-            f"&date_to={date.today()}"
             f"&ch={dialog_data['rooms']}"
             f"%2C235_f_{dialog_data['min_price']}"
             f"%2C235_t_{dialog_data['max_price']}"

@@ -77,12 +77,9 @@ class Database:
                             ads_list.append(row_ads[0])
                         yield User(id=row_users[0], search_url=row_users[1], ads_ids=set(ads_list))
 
-    async def update_user_data(
-        self, user_id: int, new_search_url: str, ads_to_save: set[int], ads_to_delete: set[int]
-    ) -> None:
+    async def update_user_data(self, user_id: int, ads_to_save: set[int], ads_to_delete: set[int]) -> None:
         """Оновлює дані користувача в базі даних"""
         async with connect(database=self._db_path) as db:
-            await db.execute("""UPDATE users SET id=?, search_url=? WHERE id=?;""", (user_id, new_search_url, user_id))
             values: list = []
             for ad_id in ads_to_delete:
                 values.append((user_id, ad_id))

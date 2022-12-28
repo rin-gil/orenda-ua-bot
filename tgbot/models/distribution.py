@@ -1,7 +1,6 @@
 """Розсилка нових оголошень користувачам"""
 
 from asyncio import sleep
-from datetime import date, timedelta
 
 from aiogram import Dispatcher
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -15,9 +14,7 @@ from tgbot.models.search import search
 async def check_for_new_ads(dp: Dispatcher) -> None:
     """Перевіряє наявність нових оголошень і надсилає їх користувачам"""
     async for user in database.get_users():
-        _: tuple = user.search_url.partition("date_from=")
-        new_search_url: str = f"{_[0]}date_from={date.today() - timedelta(days=60)}&date_to={date.today()}{_[2][29:]}"
-        new_ads: set = set(await search.get_ads_ids(search_url=new_search_url))
+        new_ads: set = set(await search.get_ads_ids(search_url=user.search_url))
         ads_to_send: set = new_ads.difference(user.ads_ids)
         for ad_id in ads_to_send:
             ad_info: AdShortInfo | None = await search.get_ad_by_id(ad_id=ad_id)
@@ -45,7 +42,6 @@ async def check_for_new_ads(dp: Dispatcher) -> None:
                     )
         await database.update_user_data(
             user_id=user.id,
-            new_search_url=new_search_url,
             ads_to_delete=user.ads_ids.difference(new_ads),
             ads_to_save=ads_to_send,
         )

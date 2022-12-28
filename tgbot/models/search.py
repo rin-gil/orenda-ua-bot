@@ -64,13 +64,13 @@ class SearchADS:
         """Повертає згенерований рядок пошуку оголошень"""
         return await self._formatter.gen_ads_search_link(dialog_data=dialog_data)
 
-    async def get_count_of_found_ads(self, search_url: str) -> int:
-        """Повертає число знайдених оголошень"""
+    async def check_if_ads_found(self, search_url: str) -> bool:
+        """Перевіряє, чи існує хоча б одне оголошення за вказаними параметрами"""
         raw_data: list[dict] | dict | None = await self._make_request(url=search_url)
         if raw_data and isinstance(raw_data, dict):
             ads_count: int | None = await self._parser.parse_ads_count(data=raw_data)
-            return ads_count if ads_count else 0
-        return 0
+            return bool(ads_count)
+        return False
 
     async def get_ads_ids(self, search_url: str) -> list:
         """Повертає ідентифікатори знайдених оголошень"""

@@ -167,10 +167,10 @@ search_setup_dialog: Dialog = Dialog(
     Window(
         Case(
             texts={
-                True: Format(text="✔ Знайдено {count_ads} оголошень\n\nЩо будемо робити далі?"),
+                True: Format(text="✔ Пошук завершено.\n\nЩо будемо робити далі?"),
                 False: Const(text="❌ За вказаними параметрами нічого не знайдено!\n\nСпробуй змінити умови пошуку."),
             },
-            selector="ads_found",
+            selector="if_ads_found",
         ),
         StaticMedia(path=BOT_LOGO, type=ContentType.PHOTO),
         MessageInput(func=any_other_messages, content_types=[ContentType.ANY]),
@@ -179,13 +179,13 @@ search_setup_dialog: Dialog = Dialog(
                 text=Const(text="↗ Переглянути на сайті"),
                 url=Format(text="{show_ads_url}"),
                 id="b_show_ads",
-                when="ads_found",
+                when="if_ads_found",
             ),
             Button(
                 text=Const(text="🆗 Підписатися на пошук"),
                 id="b_subscribe",
                 on_click=save_user_search_settings,
-                when="ads_found",
+                when="if_ads_found",
             ),
             Button(text=Const(text="🔍 Новий пошук"), id="b_reset_search", on_click=reset_search),
         ),
