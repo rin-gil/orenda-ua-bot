@@ -25,8 +25,7 @@ class SearchADS:
                         return result
         except (ClientError, ContentTypeError):
             return None
-        else:
-            return None
+        return None
 
     async def get_list_cities(self, city_name: str) -> list[tuple]:
         """Повертає список знайдених міст з dom.ria.com за назвою міста"""

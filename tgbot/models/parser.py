@@ -17,8 +17,7 @@ class Parser:
                 return f"{data['text']}", f"{data['payload']['cityId']}&{data['payload']['stateId']}"
         except KeyError:
             return None
-        else:
-            return None
+        return None
 
     @staticmethod
     async def parse_district_data(data: dict) -> tuple | None:
@@ -31,8 +30,7 @@ class Parser:
                 return f"{data['name']}", f"{data['areaId']}"
         except KeyError:
             return None
-        else:
-            return None
+        return None
 
     @staticmethod
     async def parse_ads_count(data: dict) -> int | None:
