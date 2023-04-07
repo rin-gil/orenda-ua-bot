@@ -6,20 +6,20 @@
     <a href="https://www.python.org/downloads/release/python-3108/">
         <img src="https://img.shields.io/badge/python-v3.10-informational" alt="python version">
     </a>
-    <a href="https://pypi.org/project/aiogram/2.23.1/">
-        <img src="https://img.shields.io/badge/aiogram-v2.23.1-informational" alt="aiogram version">
+    <a href="https://pypi.org/project/aiogram/2.25.1/">
+        <img src="https://img.shields.io/badge/aiogram-v2.25.1-informational" alt="aiogram version">
     </a>
     <a href="https://pypi.org/project/aiogram-dialog/1.9.0/">
         <img src="https://img.shields.io/badge/aiogram_dialog-v1.9.0-informational" alt="aiogram version">
     </a>
-    <a href="https://pypi.org/project/aiohttp/3.8.3/">
-        <img src="https://img.shields.io/badge/aiohttp-v3.8.3-informational" alt="aiohttp version">
+    <a href="https://pypi.org/project/aiohttp/3.8.4/">
+        <img src="https://img.shields.io/badge/aiohttp-v3.8.4-informational" alt="aiohttp version">
     </a>
     <a href="https://pypi.org/project/aiosqlite/0.18.0/">
         <img src="https://img.shields.io/badge/aiosqlite-v0.18.0-informational" alt="aiosqlite version">
     </a>
-    <a href="https://pypi.org/project/APScheduler/3.9.1.post1/">
-        <img src="https://img.shields.io/badge/APScheduler-v3.9.1.post1-informational" alt="APScheduler version">
+    <a href="https://pypi.org/project/APScheduler/3.10.1/">
+        <img src="https://img.shields.io/badge/APScheduler-v3.10.1-informational" alt="APScheduler version">
     </a>
     <a href="https://pypi.org/project/environs/9.5.0/">
         <img src="https://img.shields.io/badge/environs-v9.5.0-informational" alt="environs version">
