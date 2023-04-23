@@ -2,6 +2,7 @@
 
 from aiogram import Dispatcher
 from aiogram.types import Message, Update, ContentType
+from aiogram.utils.exceptions import TelegramAPIError
 
 from aiogram_dialog import DialogManager, StartMode
 from aiogram_dialog.exceptions import UnknownIntent
@@ -22,7 +23,7 @@ async def other_type_handler(message: Message, dialog_manager: DialogManager) ->
         await dialog_manager.start(state=SearchSetup.input_city_name, mode=StartMode.RESET_STACK)
 
 
-async def error_handler(update: Update, exception: Exception, dialog_manager: DialogManager) -> bool:
+async def error_handler(update: Update, exception: TelegramAPIError, dialog_manager: DialogManager) -> bool:
     """Обробка помилки UnknownIntent та запуск нового діалогового вікна налаштування пошуку"""
     if isinstance(exception, UnknownIntent):
         await update.callback_query.answer(text="❌ Дані застаріли", cache_time=1)
@@ -30,7 +31,7 @@ async def error_handler(update: Update, exception: Exception, dialog_manager: Di
         await dialog_manager.start(state=SearchSetup.input_city_name, mode=StartMode.RESET_STACK)
     else:
         logger.error(
-            "When processing the update with id=%s there was a unhandled error: %s", update.update_id, exception
+            "When processing the update with id=%s there was a unhandled error: %s", update.update_id, repr(exception)
         )
     return True
 
