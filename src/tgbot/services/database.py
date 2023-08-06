@@ -47,9 +47,9 @@ class Database:
     async def add_user(self, user_id: int, search_url: str, ads_ids: list) -> None:
         """Додає нового користувача в базу даних"""
         pool: Pool = await self._get_pool()
-        values: list[tuple] = [(user_id, ad_id) for ad_id in ads_ids]
+        values: list[tuple[int, int]] = [(user_id, ad_id) for ad_id in ads_ids]
         await pool.execute("""INSERT INTO users (user_id, search_url) VALUES ($1, $2);""", user_id, search_url)
-        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES ($1, $2);""", values)
+        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS INT)::BIGINT, $2);""", values)
 
     async def delete_user(self, user_id: int) -> None:
         """Видаляє з бази даних всі записи про користувача і знайдені для нього оголошення"""
