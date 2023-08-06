@@ -83,3 +83,9 @@ class Database:
         for ad_id in ads_to_save:
             values.append((user_id, ad_id))
         await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS INT)::BIGINT, $2);""", values)
+
+    async def close(self) -> None:
+        """Закриває пул підключень до бази даних"""
+        if self._pool:
+            await self._pool.close()
+            self._pool = None
