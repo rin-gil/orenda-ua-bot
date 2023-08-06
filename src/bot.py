@@ -10,6 +10,7 @@ from aiohttp import ClientSession
 from tgbot.config import Config, load_config, logger
 from tgbot.controllers.dialog_handlers import register_dialog_handlers
 from tgbot.controllers.other_handlers import register_other_handlers
+from tgbot.misc.commands import set_default_commands
 from tgbot.misc.sheduler import schedule
 from tgbot.services.database import Database
 from tgbot.views.dialog import search_setup_dialog
@@ -33,7 +34,7 @@ async def on_startup(dp: Dispatcher) -> None:
     config: Config = dp.bot.get("config")
     await database.init()
     await schedule(dp)
-    # await set_default_commands(dp)
+    await set_default_commands(dp)
     if config.webhook:
         await dp.bot.set_webhook(
             url=f"{config.webhook.wh_host}/{config.webhook.wh_path}",
