@@ -50,22 +50,47 @@
 * Налаштування фільтра для пошуку оголошень.
 * Підписка на нові оголошення, згідно з заданим фільтром.
 
-### Установлення
+### Інсталяція бота
+
+Якщо вам потрібна проста версія бота, без використання бази даних Postgres і без роботи в режимі веб-хука, перейдіть до [цієї гілки](https://github.com/rin-gil/orenda-ua-bot/tree/simple-with-sqlite-no-webhook).
+
+Встановіть бота за допомогою команди в терміналі:
 
 ```
-git clone https://github.com/rin-gil/orenda-ua-bot.git
-cd orenda-ua-bot
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-mv .env.example .env
+wget https://raw.githubusercontent.com/rin-gil/orenda-ua-bot/master/infrastructure/deploy.sh && chmod +x deploy.sh && ./deploy.sh
 ```
+
+### Встановлення та налаштування Postgres
+
+Встановіть базу даних Postgres згідно з інструкцією з офіційного сайту: https://www.postgresql.org/download/
+
+Робота бота протестована на Postgres версії 15
+
+Створіть базу даних, користувача та налаштування, виконавши команди в терміналі:
+
+```
+sudo -u postgres psql
+CREATE DATABASE db_name;
+CREATE USER db_user WITH PASSWORD 'db_password';
+\connect db_name;
+CREATE SCHEMA db_name AUTHORIZATION db_user;
+ALTER ROLE db_user SET client_encoding TO 'utf8';
+ALTER ROLE db_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE db_user SET timezone TO 'UTC';
+\q
+```
+
+Замініть _db_name_, _db_user_ і _db_password_ у цих командах своїми даними.
 
 ### Налаштування та запуск
 
 * Зареєструйте нового бота у [@BotFather](https://t.me/BotFather) і скопіюйте отриманий токен
-* Вставте токен бота у файл .env
+* Вставте токен бота та облікові дані до бази даних у файл .env
 * Запуск бота через файл bot.py `python bot.py`
+
+### Додаткова конфігурація
+
+Приклади конфігурацій для запуску бота в режимі webhook або як systemd-сервіс можна знайти в теці [infrastructure](https://github.com/rin-gil/orenda-ua-bot/tree/master/infrastructure)
 
 ### Розробники
 
