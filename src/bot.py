@@ -11,7 +11,7 @@ from tgbot.config import Config, load_config, logger
 from tgbot.controllers.dialog_handlers import register_dialog_handlers
 from tgbot.controllers.other_handlers import register_other_handlers
 from tgbot.misc.sheduler import schedule
-from tgbot.models.database import database
+from tgbot.services.database import Database
 from tgbot.views.dialog import search_setup_dialog
 
 
@@ -33,6 +33,8 @@ async def main() -> None:
     config: Config = load_config()
     bot: Bot = Bot(token=config.tg_bot.token)
     dp: Dispatcher = Dispatcher(bot=bot, storage=MemoryStorage())
+    database: Database = Database(db_config=config.db)
+    bot["db"] = database
 
     register_all_handlers(dp)
     register_dialog(dp)

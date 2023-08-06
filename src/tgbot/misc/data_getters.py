@@ -4,7 +4,7 @@ from typing import Any
 
 from aiogram_dialog import DialogManager
 
-from tgbot.models.search import search
+from tgbot.services.search import search
 
 
 async def get_found_cities(dialog_manager: DialogManager, **kwargs: Any) -> dict:

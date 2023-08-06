@@ -9,17 +9,17 @@ from aiogram_dialog.exceptions import UnknownIntent
 
 from tgbot.config import logger
 from tgbot.misc.states import SearchSetup
-from tgbot.models.database import database
+from tgbot.services.database import Database
 
 
 async def other_type_handler(message: Message, dialog_manager: DialogManager) -> None:
     """
-    Видаляє всі введені користувачем дані, які не мають відношення до діалогу
-
+    Видаляє всі введені користувачем дані, які не мають відношення до діалогу.
     Якщо користувача немає в базі даних, запускає новий діалог
     """
     await message.delete()
-    if not await database.check_if_user_exists(user_id=message.from_user.id):
+    db: Database = message.bot.get("db")
+    if not await db.check_if_user_exists(user_id=message.from_user.id):
         await dialog_manager.start(state=SearchSetup.input_city_name, mode=StartMode.RESET_STACK)
 
 

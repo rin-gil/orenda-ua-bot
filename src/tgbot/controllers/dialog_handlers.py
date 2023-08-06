@@ -12,15 +12,14 @@ from aiogram_dialog.widgets.kbd import Button
 
 from tgbot.config import BOT_LOGO
 from tgbot.misc.states import SearchSetup
-from tgbot.models.database import database
-from tgbot.models.search import search
+from tgbot.services.database import Database
+from tgbot.services.search import search
 
 
 async def on_start(start_data: Any, manager: DialogManager) -> None:
     """Встановлює початкові дані для діалогу"""
     proxy: StorageProxy = manager.data["aiogd_storage_proxy"]
     await proxy.storage.set_state(user=proxy.user_id, chat=proxy.chat_id, state="dialog")
-    await database.delete_user(user_id=proxy.user_id)
 
 
 async def on_close(result: Any, manager: DialogManager) -> None:
@@ -30,6 +29,9 @@ async def on_close(result: Any, manager: DialogManager) -> None:
 
 async def start(message: Message, dialog_manager: DialogManager) -> None:
     """Запуск діалогового вікна налаштування пошуку оголошень"""
+    proxy: StorageProxy = dialog_manager.data["aiogd_storage_proxy"]
+    db: Database = message.bot.get("db")
+    await db.delete_user(user_id=proxy.user_id)
     await message.delete()
     await dialog_manager.start(state=SearchSetup.input_city_name, mode=StartMode.RESET_STACK)
 
@@ -39,7 +41,8 @@ async def stop(message: Message, dialog_manager: DialogManager) -> None:
     await message.delete()
     await dialog_manager.reset_stack()
     await dialog_manager.data["state"].reset_state()
-    await database.delete_user(user_id=message.from_user.id)
+    db: Database = message.bot.get("db")
+    await db.delete_user(user_id=message.from_user.id)
     await message.answer_photo(
         photo=InputFile(path_or_bytesio=BOT_LOGO),
         caption="❌ Усі твої дані видалені.\n\nЩоб налаштувати новий пошук, натисни /start",
@@ -125,7 +128,8 @@ async def save_user_search_settings(callback: CallbackQuery, button: Button, man
     """Зберігає результати пошуку оголошень"""
     search_url: str = manager.current_context().dialog_data["search_url"]
     ads_ids: list = await search.get_ads_ids(search_url=search_url)
-    await database.add_user(user_id=callback.from_user.id, search_url=search_url, ads_ids=ads_ids)
+    db: Database = callback.bot.get("db")
+    await db.add_user(user_id=callback.from_user.id, search_url=search_url, ads_ids=ads_ids)
     await callback.message.edit_caption(
         caption="✔ Підписку оформлено!\n\n"
         "Я надсилатиму тобі нові оголошення в міру їх появи.\n"

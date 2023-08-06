@@ -6,13 +6,14 @@ from aiogram import Dispatcher
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.exceptions import BotBlocked, RetryAfter, UserDeactivated
 
-from tgbot.models.database import database
-from tgbot.models.dataclasses import AdShortInfo
-from tgbot.models.search import search
+from tgbot.services.database import Database
+from tgbot.services.dataclasses import AdShortInfo
+from tgbot.services.search import search
 
 
 async def check_for_new_ads(dp: Dispatcher) -> None:
     """Перевіряє наявність нових оголошень і надсилає їх користувачам"""
+    database: Database = dp.bot.get("db")
     async for user in database.get_users():
         new_ads: set = set(await search.get_ads_ids(search_url=user.search_url))
         ads_to_send: set = new_ads.difference(user.ads_ids)

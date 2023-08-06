@@ -2,9 +2,9 @@
 
 from aiohttp import ClientError, ClientSession, ContentTypeError
 
-from tgbot.models.dataclasses import AdShortInfo, AdDetailedInfo
-from tgbot.models.formatter import Formatter
-from tgbot.models.parser import Parser
+from tgbot.services.dataclasses import AdShortInfo, AdDetailedInfo
+from tgbot.services.formatter import Formatter
+from tgbot.services.parser import Parser
 
 
 class SearchADS:
