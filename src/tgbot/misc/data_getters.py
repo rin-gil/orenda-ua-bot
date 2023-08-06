@@ -59,7 +59,9 @@ async def get_search_results(dialog_manager: DialogManager, **kwargs: Any) -> di
     """Генерує результати пошуку оголошень"""
     search_ads_url: str = await search.get_search_link(dialog_data=dialog_manager.current_context().dialog_data)
     dialog_manager.current_context().dialog_data["search_url"] = search_ads_url
+    ads_count: int = await search.check_ads_count(search_url=search_ads_url)
     return {
         "show_ads_url": search_ads_url.replace("node/searchEngine/v2/", "uk/search"),
-        "if_ads_found": await search.check_if_ads_found(search_url=search_ads_url),
+        "if_ads_found": bool(ads_count),
+        "ads_count": ads_count,
     }
