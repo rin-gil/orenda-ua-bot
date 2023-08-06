@@ -1,6 +1,7 @@
 """Налаштування конфігурації для бота"""
 
 import logging
+import sys
 
 from os.path import join, normpath
 from pathlib import Path
@@ -19,6 +20,16 @@ class DbConfig(NamedTuple):
     database: str
 
 
+class WebhookCredentials(NamedTuple):
+    """Represents credentials to use webhook"""
+
+    wh_host: str
+    wh_path: str
+    wh_token: str
+    app_host: str
+    app_port: int
+
+
 class TgBot(NamedTuple):
     """Дані бота"""
 
@@ -30,14 +41,17 @@ class Config(NamedTuple):
 
     tg_bot: TgBot
     db: DbConfig
+    webhook: WebhookCredentials | None
 
 
-# sys.tracebacklimit = 0
+# Change USE_WEBHOOK to True to use a webhook instead of long polling
+USE_WEBHOOK: bool = False
 
 _BASE_DIR: Path = Path(__file__).resolve().parent.parent
 _LOG_FILE: str = join(_BASE_DIR, "orenda-ua-bot.log")
 BOT_LOGO: str = normpath(join(_BASE_DIR, "tgbot/assets/img/bot_logo.png"))
 
+sys.tracebacklimit = 0
 
 logger: logging.Logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -62,4 +76,11 @@ def load_config() -> Config:
             user=env.str("POSTGRES_DB_USER"),
             database=env.str("POSTGRES_DB_NAME"),
         ),
+        webhook=WebhookCredentials(
+            wh_host=env.str("WEBHOOK_HOST"),
+            wh_path=env.str("WEBHOOK_PATH"),
+            wh_token=env.str("WEBHOOK_TOKEN"),
+            app_host=env.str("APP_HOST"),
+            app_port=env.int("APP_PORT"),
+        ) if USE_WEBHOOK else None
     )
