@@ -12,8 +12,8 @@
     <a href="https://pypi.org/project/aiogram-dialog/1.9.0/">
         <img src="https://img.shields.io/badge/aiogram_dialog-v1.9.0-informational" alt="aiogram version">
     </a>
-    <a href="https://pypi.org/project/aiohttp/3.8.4/">
-        <img src="https://img.shields.io/badge/aiohttp-v3.8.4-informational" alt="aiohttp version">
+    <a href="https://pypi.org/project/aiohttp/3.8.5/">
+        <img src="https://img.shields.io/badge/aiohttp-v3.8.5-informational" alt="aiohttp version">
     </a>
     <a href="https://pypi.org/project/aiosqlite/0.18.0/">
         <img src="https://img.shields.io/badge/aiosqlite-v0.18.0-informational" alt="aiosqlite version">
@@ -24,16 +24,18 @@
     <a href="https://pypi.org/project/environs/9.5.0/">
         <img src="https://img.shields.io/badge/environs-v9.5.0-informational" alt="environs version">
     </a>
+</p>
+<p align="center">
     <a href="https://github.com/psf/black">
         <img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-black.svg">
     </a>
-    <a href="https://github.com/rin-gil/OrendaUAbot/actions/workflows/tests.yml">
-        <img src="https://github.com/rin-gil/OrendaUAbot/actions/workflows/tests.yml/badge.svg" alt="Code tests">
+    <a href="https://github.com/rin-gil/orenda-ua-bot/actions/workflows/tests.yml">
+        <img src="https://github.com/rin-gil/orenda-ua-bot/actions/workflows/tests.yml/badge.svg" alt="Tests">
     </a>
-    <a href="https://github.com/rin-gil/OrendaUAbot/actions/workflows/codeql.yml">
-        <img src="https://github.com/rin-gil/OrendaUAbot/actions/workflows/codeql.yml/badge.svg" alt="Code tests">
+    <a href="https://github.com/rin-gil/orenda-ua-bot/actions/workflows/codeql.yml">
+        <img src="https://github.com/rin-gil/orenda-ua-bot/actions/workflows/codeql.yml/badge.svg" alt="CodeQL tests">
     </a>
-    <a href="https://github.com/rin-gil/OrendaUAbot/blob/master/LICENCE">
+    <a href="https://github.com/rin-gil/orenda-ua-bot/blob/master/LICENCE.md">
         <img src="https://img.shields.io/badge/licence-MIT-success" alt="MIT licence">
     </a>
 </p>
@@ -51,12 +53,12 @@
 ### Установлення
 
 ```
-git clone https://github.com/rin-gil/OrendaUAbot.git
-cd OrendaUAbot
+git clone https://github.com/rin-gil/orenda-ua-bot.git
+cd orenda-ua-bot
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-mv .env.dist .env
+mv .env.example .env
 ```
 
 ### Налаштування та запуск
@@ -71,4 +73,4 @@ mv .env.dist .env
 
 ### Ліцензії
 
-Проєкт OrendaUA bot поширюється за ліцензією [MIT](https://github.com/rin-gil/OrendaUAbot/blob/master/LICENCE)
+Проєкт OrendaUA bot поширюється за ліцензією [MIT](https://github.com/rin-gil/orenda-ua-bot/blob/master/LICENCE.md)
