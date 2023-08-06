@@ -1,6 +1,6 @@
 """Парсинг сирих даних з dom.ria.com"""
 
-from tgbot.models.dataclasses import AdDetailedInfo
+from tgbot.services.dataclasses import AdDetailedInfo
 
 
 class Parser:

@@ -2,9 +2,9 @@
 
 from aiohttp import ClientError, ClientSession, ContentTypeError
 
-from tgbot.models.dataclasses import AdShortInfo, AdDetailedInfo
-from tgbot.models.formatter import Formatter
-from tgbot.models.parser import Parser
+from tgbot.services.dataclasses import AdShortInfo, AdDetailedInfo
+from tgbot.services.formatter import Formatter
+from tgbot.services.parser import Parser
 
 
 class SearchADS:
@@ -63,13 +63,13 @@ class SearchADS:
         """Повертає згенерований рядок пошуку оголошень"""
         return await self._formatter.gen_ads_search_link(dialog_data=dialog_data)
 
-    async def check_if_ads_found(self, search_url: str) -> bool:
+    async def check_ads_count(self, search_url: str) -> int:
         """Перевіряє, чи існує хоча б одне оголошення за вказаними параметрами"""
         raw_data: list[dict] | dict | None = await self._make_request(url=search_url)
         if raw_data and isinstance(raw_data, dict):
             ads_count: int | None = await self._parser.parse_ads_count(data=raw_data)
-            return bool(ads_count)
-        return False
+            return ads_count if ads_count else 0
+        return 0
 
     async def get_ads_ids(self, search_url: str) -> list:
         """Повертає ідентифікатори знайдених оголошень"""

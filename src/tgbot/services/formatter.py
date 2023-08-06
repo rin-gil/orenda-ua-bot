@@ -1,6 +1,6 @@
 """Форматує різні дані в потрібну форму"""
 
-from tgbot.models.dataclasses import AdDetailedInfo, AdShortInfo
+from tgbot.services.dataclasses import AdDetailedInfo, AdShortInfo
 
 
 class Formatter:

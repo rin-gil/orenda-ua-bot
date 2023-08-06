@@ -3,7 +3,7 @@
 from aiogram import Dispatcher
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from tgbot.models.distribution import check_for_new_ads
+from tgbot.services.distribution import check_for_new_ads
 
 
 async def schedule(dp: Dispatcher) -> None:

@@ -167,7 +167,7 @@ search_setup_dialog: Dialog = Dialog(
     Window(
         Case(
             texts={
-                True: Format(text="✔ Пошук завершено.\n\nЩо будемо робити далі?"),
+                True: Format(text="✔ Пошук завершено, знайдено {ads_count} оголошень.\n\nЩо будемо робити далі?"),
                 False: Const(text="❌ За вказаними параметрами нічого не знайдено!\n\nСпробуй змінити умови пошуку."),
             },
             selector="if_ads_found",

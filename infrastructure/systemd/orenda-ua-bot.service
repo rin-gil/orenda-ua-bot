@@ -1,0 +1,15 @@
+# Конфігурація для запуску бота на сервері як systemd-сервісу
+[Unit]
+Description=Orenda UA Bot daemon
+After=network.target
+
+[Service]
+User=bot
+Group=bot
+Type=simple
+WorkingDirectory=/opt/orenda-ua-bot
+ExecStart=/opt/orenda-ua-bot/venv/bin/python /opt/orenda-ua-bot/bot.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
