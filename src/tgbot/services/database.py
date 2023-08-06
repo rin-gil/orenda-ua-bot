@@ -47,9 +47,9 @@ class Database:
     async def add_user(self, user_id: int, search_url: str, ads_ids: list) -> None:
         """Додає нового користувача в базу даних"""
         pool: Pool = await self._get_pool()
-        values: list[tuple[int, int]] = [(user_id, ad_id) for ad_id in ads_ids]
+        values: list[tuple[str, int]] = [(str(user_id), ad_id) for ad_id in ads_ids]
         await pool.execute("""INSERT INTO users (user_id, search_url) VALUES ($1, $2);""", user_id, search_url)
-        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS INT)::BIGINT, $2);""", values)
+        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS TEXT)::BIGINT, $2);""", values)
 
     async def delete_user(self, user_id: int) -> None:
         """Видаляє з бази даних всі записи про користувача і знайдені для нього оголошення"""
@@ -75,14 +75,14 @@ class Database:
     async def update_user_data(self, user_id: int, ads_to_save: set[int], ads_to_delete: set[int]) -> None:
         """Оновлює дані користувача в базі даних"""
         pool: Pool = await self._get_pool()
-        values: list[tuple[int, int]] = []
+        values: list[tuple[int | str, int]] = []
         for ad_id in ads_to_delete:
             values.append((user_id, ad_id))
         await pool.executemany("""DELETE FROM ads WHERE user_id=$1 AND ad_id=$2;""", values)
         values.clear()
         for ad_id in ads_to_save:
-            values.append((user_id, ad_id))
-        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS INT)::BIGINT, $2);""", values)
+            values.append((str(user_id), ad_id))
+        await pool.executemany("""INSERT INTO ads (user_id, ad_id) VALUES (CAST($1 AS TEXT)::BIGINT, $2);""", values)
 
     async def close(self) -> None:
         """Закриває пул підключень до бази даних"""
