@@ -4,3 +4,4 @@ aiohttp==3.8.5
 asyncpg==0.28.0
 APScheduler==3.10.1
 environs==9.5.0
+redis==4.6.0

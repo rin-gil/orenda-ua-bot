@@ -15,9 +15,18 @@ class DbConfig(NamedTuple):
 
     host: str
     port: str
-    password: str
-    user: str
     database: str
+    user: str
+    password: str
+
+
+class RedisConfig(NamedTuple):
+    """Redis database configuration"""
+
+    host: str
+    port: int
+    database_index: int
+    password: str
 
 
 class WebhookCredentials(NamedTuple):
@@ -41,11 +50,15 @@ class Config(NamedTuple):
 
     tg_bot: TgBot
     db: DbConfig
+    redis: RedisConfig | None
     webhook: WebhookCredentials | None
 
 
 # Change USE_WEBHOOK to True to use a webhook instead of long polling
 USE_WEBHOOK: bool = False
+
+# Change USE_REDIS to True to use redis storage for FSM instead of memory
+USE_REDIS: bool = False
 
 _BASE_DIR: Path = Path(__file__).resolve().parent.parent
 _LOG_FILE: str = join(_BASE_DIR, "orenda-ua-bot.log")
@@ -70,18 +83,26 @@ def load_config() -> Config:
             token=env.str("BOT_TOKEN"),
         ),
         db=DbConfig(
-            host=env.str("POSTGRES_DB_HOST"),
-            port=env.str("POSTGRES_DB_PORT"),
-            password=env.str("POSTGRES_DB_PASSWORD"),
-            user=env.str("POSTGRES_DB_USER"),
-            database=env.str("POSTGRES_DB_NAME"),
+            host=env.str("PG_HOST"),
+            port=env.str("PG_PORT"),
+            database=env.str("PG_DB_NAME"),
+            user=env.str("PG_DB_USER"),
+            password=env.str("PG_DB_PASS"),
         ),
+        redis=RedisConfig(
+            host=env.str("REDIS_HOST"),
+            port=env.int("REDIS_PORT"),
+            database_index=env.int("REDIS_DB_INDEX"),
+            password=env.str("REDIS_DB_PASS"),
+        )
+        if USE_REDIS
+        else None,
         webhook=WebhookCredentials(
             wh_host=env.str("WEBHOOK_HOST"),
             wh_path=env.str("WEBHOOK_PATH"),
             wh_token=env.str("WEBHOOK_TOKEN"),
-            app_host=env.str("APP_HOST"),
-            app_port=env.int("APP_PORT"),
+            app_host=env.str("WEBAPP_HOST"),
+            app_port=env.int("WEBAPP_PORT"),
         )
         if USE_WEBHOOK
         else None,

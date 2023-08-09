@@ -2,6 +2,7 @@
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aiogram.utils.executor import start_polling, start_webhook
 
 from aiogram_dialog import DialogRegistry
@@ -61,7 +62,14 @@ def start_bot() -> None:
 
     config: Config = load_config()
     bot: Bot = Bot(token=config.tg_bot.token)
-    dp: Dispatcher = Dispatcher(bot=bot, storage=MemoryStorage())
+    storage: MemoryStorage | RedisStorage2 = RedisStorage2(
+        host=config.redis.host,
+        port=config.redis.port,
+        db=config.redis.database_index,
+        password=config.redis.password,
+        prefix="ouab_fsm",
+    ) if config.redis else MemoryStorage()
+    dp: Dispatcher = Dispatcher(bot=bot, storage=storage)
     database: Database = Database(db_config=config.db)
     bot["config"] = config
     bot["db"] = database

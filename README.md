@@ -15,14 +15,17 @@
     <a href="https://pypi.org/project/aiohttp/3.8.5/">
         <img src="https://img.shields.io/badge/aiohttp-v3.8.5-informational" alt="aiohttp version">
     </a>
-    <a href="https://pypi.org/project/aiosqlite/0.18.0/">
-        <img src="https://img.shields.io/badge/aiosqlite-v0.18.0-informational" alt="aiosqlite version">
+    <a href="https://pypi.org/project/asyncpg/0.28.0/">
+        <img src="https://img.shields.io/badge/asyncpg-v0.28.0-informational" alt="asyncpg version">
     </a>
     <a href="https://pypi.org/project/APScheduler/3.10.1/">
         <img src="https://img.shields.io/badge/APScheduler-v3.10.1-informational" alt="APScheduler version">
     </a>
     <a href="https://pypi.org/project/environs/9.5.0/">
         <img src="https://img.shields.io/badge/environs-v9.5.0-informational" alt="environs version">
+    </a>
+    <a href="https://pypi.org/project/redis/4.6.0/">
+        <img src="https://img.shields.io/badge/redis-v4.6.0-informational" alt="redis version">
     </a>
 </p>
 <p align="center">
